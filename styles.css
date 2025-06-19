@@ -1,0 +1,11 @@
+.cage {
+	border: 2px solid;
+	border-collapse: collapse;
+}
+
+.cellule {
+	border: 1px solid;
+	width: 100px;
+	height: 100px;
+	font-size: 0;
+}
