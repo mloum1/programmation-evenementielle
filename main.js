@@ -26,22 +26,30 @@ out.appendChild(cage);
 
 function deplacerPion(evt) {
 	const touchesAutorisees = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
+
+	const directions = {
+		ArrowUp:    { dx: -1, dy:  0 },
+		ArrowDown:  { dx:  1, dy:  0 },
+		ArrowLeft:  { dx:  0, dy: -1 },
+		ArrowRight: { dx:  0, dy:  1 }
+	};
+
 	if (!touchesAutorisees.includes(evt.key)) {
 		return;
 	}
 
 	cage.rows[x].cells[y].removeChild(pion);
 
-	// Pas de placement en diagonal et on vérifie qu'on ne sort pas du tableau
-	if (evt.key === "ArrowUp" && x > 0) {
-		x -= 1;
-	} else if (evt.key === "ArrowDown" && x < cage.rows.length - 1) {
-		x += 1;
-	} else if (evt.key === "ArrowLeft" && y > 0) {
-		y -= 1;
-	} else if (evt.key === "ArrowRight" && y < cage.rows[0].cells.length - 1) {
-		y += 1;
+	const { dx, dy } = directions[evt.key];
+
+	const newX = x + dx;
+	const newY = y + dy;
+
+	if (newX >= 0 && newX < cage.rows.length && newY >= 0 && newY < cage.rows[0].cells.length) {
+		x = newX;
+		y = newY;
 	}
+
 	cage.rows[x].cells[y].appendChild(pion);
 
 }
